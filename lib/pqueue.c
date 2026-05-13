@@ -36,12 +36,13 @@ Boston, MA 02111-1307, USA.  */
    (if the contents is right - left), dequeue () returns the largest
    node.  */
 
-#define DATA_SIZE (sizeof (void *))
-#define PARENT_OF(x) ((x - 1) / 2)
-#define LEFT_OF(x)  (2 * x + 1)
-#define RIGHT_OF(x) (2 * x + 2)
-#define HAVE_CHILD(x,q) (x < (q)->size / 2)
+#define DATA_SIZE (sizeof (void *)) /* 数据大小 */
+#define PARENT_OF(x) ((x - 1) / 2)  /* 获取父节点索引 */
+#define LEFT_OF(x)  (2 * x + 1)     /* 获取左子节点索引 */
+#define RIGHT_OF(x) (2 * x + 2)     /* 获取右子节点索引 */
+#define HAVE_CHILD(x,q) (x < (q)->size / 2) /* 判断是否有子节点 */
 
+/* 向上调整堆 */
 void
 trickle_up (int index, struct pqueue *queue)
 {
@@ -68,6 +69,7 @@ trickle_up (int index, struct pqueue *queue)
     (*queue->update) (tmp, index);
 }
 
+/* 向下调整堆 */
 void
 trickle_down (int index, struct pqueue *queue)
 {
@@ -106,6 +108,7 @@ trickle_down (int index, struct pqueue *queue)
     (*queue->update) (tmp, index);
 }
 
+/* 创建优先队列 */
 struct pqueue *
 pqueue_create (void)
 {
